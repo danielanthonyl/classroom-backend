@@ -1,21 +1,27 @@
 import { v4 as uuid } from "uuid";
 import validator from "validator";
 
-export interface IIdentity {}
-
 export interface IIdentityProps {
   email: string;
   password: string;
+  jwt: string;
+  username: string;
 }
 
-export class Identity implements IIdentity {
-  private email: string;
-  private password: string;
-  private id: string;
+export interface IIdentity extends IIdentityProps {}
 
-  constructor({ email, password }: IIdentityProps) {
+export class Identity implements IIdentity {
+  email: string;
+  password: string;
+  id: string;
+  jwt: string;
+  username: string;
+
+  constructor({ email, password, jwt, username }: IIdentityProps) {
     this.email = email;
     this.password = password;
+    this.jwt = jwt;
+    this.username = username;
 
     this.id = uuid();
 
