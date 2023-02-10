@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Identity {
+  uuid      String  @id @unique
+  phone     Int     @unique
+	email     String  @unique
+	password  String
+	username  String  @unique
+	photo     String
+	age       DateTime
+	name      String
+  otp       Otp[]
+  jwt       Jwt[]
+}
+
+model Jwt {
+  id          Int       @id @default(autoincrement())
+  jwt         String    @unique
+  identityId  String
+  Identity    Identity  @relation(fields: [identityId], references: [uuid])
+}
+
+model Otp {
+  id          Int       @id @default(autoincrement())
+  otp         String
+  identityId  String
+  Identity    Identity  @relation(fields: [identityId], references: [uuid])
+}

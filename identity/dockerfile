@@ -1,0 +1,13 @@
+FROM node:19.6-bullseye
+
+WORKDIR  /app
+
+COPY package.json .
+
+RUN yarn
+
+COPY . .
+
+EXPOSE 6663
+
+CMD ["yarn", "start"]

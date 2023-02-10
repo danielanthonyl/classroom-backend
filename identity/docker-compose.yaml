@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./
+    container_name: api
+    ports:
+      - "6663:6663"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.env
