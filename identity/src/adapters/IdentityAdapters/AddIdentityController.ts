@@ -1,43 +1,31 @@
 import { Request, Response } from "express";
+import { IAddIdentityDTO } from "../../domains/DTOs/identityDTOs/AddIdentityDTO";
 import { IAddIdentityUseCase } from "../../domains/useCases/IdentityUseCases/AddIdentityUseCase";
-import { ResponseBody } from "../../utils/ErrorBody";
+import { ResponseBody } from "../../utils/ResponseBody";
 
 export interface IAddIdentityController {
   handle(request: Request, response: Response): void;
 }
 
+export interface IRequestBody extends IAddIdentityDTO {}
+
 export class AddIdentityController {
   constructor(private addIdentityUseCase: IAddIdentityUseCase) {}
 
-  async handle(request: Request, response: Response) {
+  async handle(request: Request<any, any, IRequestBody>, response: Response) {
     const { body } = request;
 
     try {
-      if (!body.email || !body.password || !body.confirmPassword || !body.username) {
+      if ((!body.email && !body.phone) || !body.password) {
         return response.status(400).send(
           ResponseBody.generate({
             code: 400,
-            message: "email, password, confirmPassword and username are required.",
+            message: "email or phone, password and username are required.",
           })
         );
       }
 
-      const { email, password, confirmPassword, username } = body;
-
-      if (password !== confirmPassword) {
-        return response.status(400).send(
-          ResponseBody.generate({
-            code: 400,
-            message: "password and confirmation do not match.",
-          })
-        );
-      }
-
-      const newIdentity = await this.addIdentityUseCase.execute({
-        email,
-        password,
-        username,
-      });
+      const newIdentity = await this.addIdentityUseCase.execute(body);
 
       return response.status(200).send(
         ResponseBody.generate({
@@ -45,6 +33,7 @@ export class AddIdentityController {
           message: "new identity succesfully created",
           payload: {
             jwt: newIdentity.jwt,
+            newIdentity,
           },
           status: "success",
         })

@@ -9,13 +9,13 @@ datasource db {
 
 model Identity {
   uuid      String  @id @unique
-  phone     Int     @unique
-	email     String  @unique
+  phone     Int?     @unique
+	email     String?  @unique
 	password  String
 	username  String  @unique
 	photo     String
-	age       DateTime
-	name      String
+	age       DateTime?
+	name      String?
   otp       Otp[]
   jwt       Jwt[]
 }
@@ -29,7 +29,7 @@ model Jwt {
 
 model Otp {
   id          Int       @id @default(autoincrement())
-  otp         String
+  otp         Int
   identityId  String
   Identity    Identity  @relation(fields: [identityId], references: [uuid])
 }

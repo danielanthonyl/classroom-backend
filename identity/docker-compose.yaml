@@ -9,6 +9,9 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres
     container_name: postgres

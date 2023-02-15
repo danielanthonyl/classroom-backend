@@ -8,6 +8,8 @@ RUN yarn
 
 COPY . .
 
+RUN yarn prisma generate
+
 EXPOSE 6663
 
 CMD ["yarn", "start"]
