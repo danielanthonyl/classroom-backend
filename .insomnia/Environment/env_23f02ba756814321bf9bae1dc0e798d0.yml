@@ -1,0 +1,18 @@
+_id: env_23f02ba756814321bf9bae1dc0e798d0
+type: Environment
+parentId: env_dc5065681aeef6578c33f032301c633560c1bf01
+modified: 1675824104460
+created: 1675823806008
+name: local
+data:
+  protocol: http
+  host: localhost
+  port: "6663"
+dataPropertyOrder:
+  "&":
+    - protocol
+    - host
+    - port
+color: "#000000"
+isPrivate: false
+metaSortKey: 1675823806008

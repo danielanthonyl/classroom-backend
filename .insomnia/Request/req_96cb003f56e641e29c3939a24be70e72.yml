@@ -1,0 +1,30 @@
+_id: req_96cb003f56e641e29c3939a24be70e72
+type: Request
+parentId: fld_7846c837353a4dc8b02146be218debc8
+modified: 1676430843871
+created: 1675823607594
+url: "{{url}}/identity/new"
+name: new
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"phone": 1234541,
+    	"password": "Val1dP#sswords",
+    	"username": "oks"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1675823607594
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
