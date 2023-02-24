@@ -17,7 +17,6 @@ export const IdentityRepository: IIdentityRepository = class {
   public static async addIdentity(identity: IIdentity) {
     const { orm } = new DatabaseProvider();
 
-    // DEBT: create wrapper for all databse crud on databaseProvider
     const {
       jwt: [{ jwt }],
       otp: [{ otp }],

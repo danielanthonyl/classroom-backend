@@ -27,13 +27,14 @@ export class AddIdentityController {
 
       const newIdentity = await this.addIdentityUseCase.execute(body);
 
+      console.info("New Identity added successfully.");
+
       return response.status(200).send(
         ResponseBody.generate({
           code: 200,
           message: "new identity succesfully created",
           payload: {
             jwt: newIdentity.jwt,
-            newIdentity,
           },
           status: "success",
         })

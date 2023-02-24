@@ -27,12 +27,7 @@ export class AddIdentityUseCase implements IAddIdentityUseCase {
       data: data.email || data.phone!,
     });
 
-    // DEBT: implement api and call here for otp, photo and username.
-    const otp = 1234;
-    const username = `${data.username || "random"}#${Math.random()}`;
-    const photo = data.photo || "random photo";
-
-    const identity = new Identity({ ...data, otp, jwt, username, photo });
+    const identity = new Identity({ ...data, jwt });
     const password = await this.hashProvider.hash(identity.password);
 
     return await this.identityRepository.addIdentity({ ...identity, password });

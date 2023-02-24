@@ -2,11 +2,11 @@ import { v4 as uuid } from "uuid";
 import validator from "validator";
 
 export interface IIdentityProps {
-  email?: string;
+  photo: string;
   password: string;
   username: string;
+  email?: string;
   phone?: number;
-  photo: string;
   name?: string;
   age?: Date;
   jwt?: string;
@@ -18,23 +18,18 @@ export interface IIdentity extends IIdentityProps {
 }
 
 export class Identity implements IIdentity {
-  email: string;
-  name?: string;
+  uuid: string;
+  photo: string;
   password: string;
   username: string;
-  phone: number;
-  photo: string;
-  age: Date;
-  uuid: string;
-  jwt: string;
-  otp: number;
+  email?: string;
+  phone?: number;
+  name?: string;
+  age?: Date;
+  jwt?: string;
+  otp?: number;
 
   constructor(identityProps: IIdentityProps) {
-    // this.email = email;
-    // this.password = password;
-    // this.jwt = jwt;
-    // this.username = username;
-
     Object.assign(this, identityProps);
 
     this.uuid = uuid();
